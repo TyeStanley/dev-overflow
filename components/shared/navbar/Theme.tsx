@@ -5,15 +5,7 @@ import Image from "next/image";
 
 import { useTheme } from "@/context/ThemeProvider";
 
-import {
-  Menubar,
-  MenubarContent,
-  MenubarItem,
-  MenubarMenu,
-  MenubarSeparator,
-  MenubarShortcut,
-  MenubarTrigger,
-} from "@/components/ui/menubar";
+import { Menubar, MenubarContent, MenubarItem, MenubarMenu, MenubarTrigger } from "@/components/ui/menubar";
 import { themes } from "@/constants";
 
 const Theme = () => {
