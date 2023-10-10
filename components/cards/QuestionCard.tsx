@@ -1,6 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import RenderTag from "../shared/RenderTag";
+import Metric from "../shared/Metric";
 
 interface QuestionProps {
   _id: string;
@@ -45,7 +46,15 @@ const QuestionCard = ({ _id, title, tags, author, upvotes, views, answers, creat
         ))}
       </div>
 
-      <div className="flex-between mt-6 w-full flex-wrap gap-3"></div>
+      <div className="flex-between mt-6 w-full flex-wrap gap-3">
+        <Metric
+          imgUrl="/assets/icons/like.svg"
+          alt="Upvotes"
+          value={upvotes}
+          title=" Votes"
+          textStyles="small-medium text-dark400_light800"
+        />
+      </div>
     </div>
   );
 };
