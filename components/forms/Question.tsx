@@ -117,6 +117,8 @@ const Question = () => {
                     // @ts-ignore
                     editorRef.current = editor;
                   }}
+                  onBlur={field.onBlur}
+                  onEditorChange={content => field.onChange(content)}
                   initialValue=""
                   init={{
                     height: 350,
