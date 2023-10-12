@@ -34,7 +34,11 @@ const Question = () => {
     try {
       // make an async call to the api -> create a question
       // contain all form data
-      await createQuestion({});
+      await createQuestion({
+        title: values.title,
+        explanation: values.explanation,
+        tags: values.tags,
+      });
       // navigate to home page
     } catch (error) {
     } finally {
