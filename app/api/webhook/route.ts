@@ -65,6 +65,21 @@ export async function POST(req: Request) {
     });
 
     return NextResponse.json({ message: "OK", user: mongoUser });
+  } else if (eventType === "user.updated") {
+    const { id, email_addresses, image_url, username, first_name, last_name } = evt.data;
+
+    const mongoUser = await updateUser({
+      clerkId: id,
+      updateData: {
+        name: `${first_name} ${last_name ? ` ${last_name}` : ""}`,
+        username: username!,
+        email: email_addresses[0].email_address,
+        picture: image_url,
+      },
+      path: `/profile/${id}`,
+    });
+
+    return NextResponse.json({ message: "OK", user: mongoUser });
   }
 
   return new Response("", { status: 201 });
