@@ -3,6 +3,9 @@
 import Question from "@/database/question.model";
 import Tag from "@/database/tag.model";
 import { connectToDatabase } from "../mongoose";
+import { GetQuestionsParams } from "./shared.types";
+
+export async function getQuestions(params: GetQuestionsParams) {}
 
 export async function createQuestion(params: any) {
   try {
@@ -35,5 +38,7 @@ export async function createQuestion(params: any) {
     // Create an interaction record for the user's ask_question action
 
     // Increment author's reputation by +5 for creating a question
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
 }

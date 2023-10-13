@@ -44,7 +44,9 @@ const questions = [
   },
 ];
 
-export default function Home() {
+export default async function Home() {
+  // const result = await getQuestions();
+
   return (
     <>
       <div className="flex w-full flex-col-reverse justify-between gap-4 sm:flex-row sm:items-center">
