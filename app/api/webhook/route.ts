@@ -82,5 +82,15 @@ export async function POST(req: Request) {
     return NextResponse.json({ message: "OK", user: mongoUser });
   }
 
+  if (eventType === "user.deleted") {
+    const { id } = evt.data;
+
+    const deletedUser = await deleteUser({
+      clerkId: id,
+    });
+
+    return NextResponse.json({ message: "OK", user: deletedUser });
+  }
+
   return new Response("", { status: 201 });
 }
