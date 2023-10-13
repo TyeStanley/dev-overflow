@@ -39,15 +39,14 @@ const Question = ({ mongoUserId }: Props) => {
     setIsSubmitting(true);
 
     try {
-      // make an async call to the api -> create a question
-      // contain all form data
       await createQuestion({
         title: values.title,
         content: values.explanation,
         tags: values.tags,
         author: JSON.parse(mongoUserId),
+        path: pathname,
       });
-      // navigate to home page
+
       router.push("/");
     } catch (error) {
     } finally {
