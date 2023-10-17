@@ -22,7 +22,7 @@ const Answer = () => {
     },
   });
 
-  const handleCreateAnswer = data => {};
+  const handleCreateAnswer = () => {};
 
   return (
     <div>
