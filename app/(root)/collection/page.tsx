@@ -3,10 +3,17 @@ import Filter from "@/components/shared/Filter";
 import NoResult from "@/components/shared/NoResult";
 import LocalSearchbar from "@/components/shared/search/LocalSearchbar";
 import { QuestionFilters } from "@/constants/filters";
-import { getQuestions } from "@/lib/actions/question.action";
+import { getSavedQuestions } from "@/lib/actions/user.action";
+import { auth } from "@clerk/nextjs";
 
 export default async function Home() {
-  const result = await getQuestions({});
+  const { userId } = auth();
+
+  if (!userId) return null;
+
+  const result = await getSavedQuestions({
+    clerkId: userId,
+  });
 
   return (
     <>
