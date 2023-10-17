@@ -70,6 +70,7 @@ const Votes = ({ type, itemId, userId, upvotes, hasupVoted, downvotes, hasdownVo
       // TODO: add toast
     }
   };
+
   return (
     <div className="flex gap-5">
       <div className="flex-center gap-2.5">
