@@ -9,17 +9,19 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "../ui/textarea";
 import { useState } from "react";
 import { ProfileSchema } from "@/lib/validations";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { updateUser } from "@/lib/actions/user.action";
 
-interface Params {
+interface Props {
   clerkId: string;
   user: string;
 }
 
-const Profile = ({ clerkId, user }: Params) => {
+const Profile = ({ clerkId, user }: Props) => {
   const parsedUser = JSON.parse(user);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter();
+  const pathname = usePathname();
 
   const form = useForm<z.infer<typeof ProfileSchema>>({
     resolver: zodResolver(ProfileSchema),
@@ -32,10 +34,22 @@ const Profile = ({ clerkId, user }: Params) => {
     },
   });
 
-  function onSubmit(values: z.infer<typeof ProfileSchema>) {
+  async function onSubmit(values: z.infer<typeof ProfileSchema>) {
     setIsSubmitting(true);
 
     try {
+      await updateUser({
+        clerkId,
+        updateData: {
+          name: values.name,
+          username: values.username,
+          portfolioWebsite: values.portfolioWebsite,
+          location: values.location,
+          bio: values.bio,
+        },
+        path: pathname,
+      });
+
       router.back();
     } catch (error) {
       console.log(error);
@@ -150,7 +164,7 @@ const Profile = ({ clerkId, user }: Params) => {
         <div className="mt-7 flex justify-end">
           <Button
             type="submit"
-            className="primary-gradient w-fit"
+            className="primary-gradient w-fit text-white"
             disabled={isSubmitting}
           >
             {isSubmitting ? "Saving..." : "Save"}
