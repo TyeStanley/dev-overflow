@@ -65,7 +65,7 @@ const Answer = ({ question, questionId, authorId }: Props) => {
 
     try {
       console.log("working");
-      const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/chatgpt`, {
+      const response = await fetch(`/api/chatgpt`, {
         method: "POST",
         body: JSON.stringify({ question }),
       });
@@ -74,10 +74,12 @@ const Answer = ({ question, questionId, authorId }: Props) => {
 
       const formattedAnswer = aiAnswer.reply.replace(/\n/g, "<br />");
 
+      console.log(formattedAnswer);
+
       if (editorRef.current) {
         const editor = editorRef.current as any;
 
-        editor.setContent(formattedAnswer);
+        editor.setContent(JSON.stringify(formattedAnswer));
       }
 
       if (aiAnswer.reply) {
