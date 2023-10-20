@@ -147,7 +147,6 @@ export async function downvoteAnswer(params: AnswerVoteParams) {
 
     if (!answer) throw new Error("Answer not found");
 
-    // TODO: Increment author's reputation by +10 for upvoting a answer
     await User.findByIdAndUpdate(userId, {
       $inc: { reputation: hasdownVoted ? -2 : 2 },
     });

@@ -17,6 +17,7 @@ interface QuestionProps {
     _id: string;
     name: string;
     picture: string;
+    clerkId: string;
   };
   upvotes: string[];
   views: number;
@@ -26,7 +27,6 @@ interface QuestionProps {
 }
 
 const QuestionCard = ({ clerkId, _id, title, tags, author, upvotes, views, answers, createdAt }: QuestionProps) => {
-  // @ts-ignore
   const showActionButtons = clerkId && clerkId === author.clerkId;
 
   return (
