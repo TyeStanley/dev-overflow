@@ -10,6 +10,14 @@ import { getQuestions } from "@/lib/actions/question.action";
 import { SearchParamsProps } from "@/types";
 import Link from "next/link";
 
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Home | Dev Overflow",
+  description:
+    "Dev Overflow is a community-driven platform for asking and answering programming questions. Get help, share knowledge, and collaborate with developers from around the world. Explore topics in web development, mobile app development, algorithms, data structures, and more.",
+};
+
 export default async function Home({ searchParams }: SearchParamsProps) {
   const result = await getQuestions({
     searchQuery: searchParams.q,
