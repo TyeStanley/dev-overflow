@@ -64,29 +64,34 @@ const Answer = ({ question, questionId, authorId }: Props) => {
     setIsSubmittingAI(true);
 
     try {
-      const response = await fetch(`/api/chatgpt`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/chatgpt`, {
         method: "POST",
         body: JSON.stringify({ question }),
       });
 
       const aiAnswer = await response.json();
 
-      const formattedAnswer = aiAnswer.reply.replace(/\r?\n/g, "<br />");
+      const formattedAnswer = aiAnswer.reply.replace(/\n/g, "<br />");
 
-      console.log(formattedAnswer);
+      console.log(formattedAnswer, typeof formattedAnswer);
 
       if (editorRef.current) {
         const editor = editorRef.current as any;
 
-        editor.setContent(formattedAnswer);
+        if (typeof formattedAnswer === "string") {
+          console.log("is string:", typeof formattedAnswer);
+          editor.setContent(formattedAnswer);
+        } else {
+          console.log("is not a string:", typeof formattedAnswer);
+          const formattedAnswerStringify = JSON.stringify(formattedAnswer);
+          editor.setContent(formattedAnswerStringify);
+        }
       }
 
-      if (formattedAnswer) {
-        <Toast
-          title="AI Answer Generated"
-          variant="default"
-        />;
-      }
+      <Toast
+        title="AI Answer Generated"
+        variant="default"
+      />;
     } catch (error) {
       console.log(error);
     } finally {
