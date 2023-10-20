@@ -68,18 +68,24 @@ const Answer = ({ question, questionId, authorId }: Props) => {
         body: JSON.stringify({ question }),
       });
 
-      const aiAnswer = await response.json();
-
-      // Convert plain text to HTML format
-
-      const formattedAnswer = aiAnswer.reply.replace(/\n/g, "<br />");
-
-      if (editorRef.current) {
-        const editor = editorRef.current as any;
-        editor.setContent(formattedAnswer);
+      if (!response.ok) {
+        // Handle non-successful response, e.g., status code is not in the 200 range
+        throw new Error(`Request failed with status ${response.status}`);
       }
 
-      // Toast...
+      const aiAnswer = await response.json();
+
+      if (aiAnswer && aiAnswer.reply) {
+        const formattedAnswer = aiAnswer.reply.replace(/\n/g, "<br />");
+
+        if (editorRef.current) {
+          const editor = editorRef.current as any;
+          editor.setContent(formattedAnswer);
+        }
+      } else {
+        // Handle unexpected response format
+        console.error("Unexpected API response format:", aiAnswer);
+      }
     } catch (error) {
       console.log(error);
     } finally {
