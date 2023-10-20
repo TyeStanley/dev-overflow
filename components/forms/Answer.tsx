@@ -12,6 +12,7 @@ import { Button } from "../ui/button";
 import Image from "next/image";
 import { createAnswer } from "@/lib/actions/answer.action";
 import { usePathname } from "next/navigation";
+import { Toast } from "../ui/toast";
 
 interface Props {
   question: string;
@@ -77,6 +78,13 @@ const Answer = ({ question, questionId, authorId }: Props) => {
         const editor = editorRef.current as any;
 
         editor.setContent(formattedAnswer);
+      }
+
+      if (aiAnswer.reply) {
+        <Toast
+          title="AI Answer Generated"
+          variant="default"
+        />;
       }
     } catch (error) {
       console.log(error);
