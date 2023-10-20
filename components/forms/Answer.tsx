@@ -64,7 +64,6 @@ const Answer = ({ question, questionId, authorId }: Props) => {
     setIsSubmittingAI(true);
 
     try {
-      console.log("working");
       const response = await fetch(`/api/chatgpt`, {
         method: "POST",
         body: JSON.stringify({ question }),
@@ -72,17 +71,17 @@ const Answer = ({ question, questionId, authorId }: Props) => {
 
       const aiAnswer = await response.json();
 
-      const formattedAnswer = aiAnswer.reply.replace(/\n/g, "<br />");
+      const formattedAnswer = aiAnswer.reply.replace(/\r?\n/g, "<br />");
 
       console.log(formattedAnswer);
 
       if (editorRef.current) {
         const editor = editorRef.current as any;
 
-        editor.setContent(JSON.stringify(formattedAnswer));
+        editor.setContent(formattedAnswer);
       }
 
-      if (aiAnswer.reply) {
+      if (formattedAnswer) {
         <Toast
           title="AI Answer Generated"
           variant="default"
