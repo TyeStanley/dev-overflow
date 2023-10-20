@@ -69,7 +69,7 @@ const Profile = ({ clerkId, user }: Props) => {
           name="name"
           render={({ field }) => (
             <FormItem className="space-y-3.5">
-              <FormLabel>
+              <FormLabel className="paragraph-semibold text-dark400_light800">
                 Name <span className="text-primary-500">*</span>
               </FormLabel>
               <FormControl>
@@ -89,7 +89,7 @@ const Profile = ({ clerkId, user }: Props) => {
           name="username"
           render={({ field }) => (
             <FormItem className="space-y-3.5">
-              <FormLabel>
+              <FormLabel className="paragraph-semibold text-dark400_light800">
                 Username <span className="text-primary-500">*</span>
               </FormLabel>
               <FormControl>
@@ -109,7 +109,7 @@ const Profile = ({ clerkId, user }: Props) => {
           name="portfolioWebsite"
           render={({ field }) => (
             <FormItem className="space-y-3.5">
-              <FormLabel>Portfolio Link</FormLabel>
+              <FormLabel className="paragraph-semibold text-dark400_light800">Portfolio Link</FormLabel>
               <FormControl>
                 <Input
                   type="url"
@@ -128,7 +128,7 @@ const Profile = ({ clerkId, user }: Props) => {
           name="location"
           render={({ field }) => (
             <FormItem className="space-y-3.5">
-              <FormLabel>Location</FormLabel>
+              <FormLabel className="paragraph-semibold text-dark400_light800">Location</FormLabel>
               <FormControl>
                 <Input
                   placeholder="Where are you from?"
@@ -146,7 +146,7 @@ const Profile = ({ clerkId, user }: Props) => {
           name="bio"
           render={({ field }) => (
             <FormItem className="space-y-3.5">
-              <FormLabel>
+              <FormLabel className="paragraph-semibold text-dark400_light800">
                 Bio <span className="text-primary-500">*</span>
               </FormLabel>
               <FormControl>
