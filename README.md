@@ -53,6 +53,7 @@ If you'd like to request a new function, feel free to do so by opening an issue 
 
 ### ✅ To-do
 
+- [ ] Fix the AI question answering feature. Currently, doesn't work in production.
 - [ ] Implement a job board.
 - [ ] Enable users to save jobs to their favorites list.
 - [ ] Allow users to apply to a job directly from the app.
