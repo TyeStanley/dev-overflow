@@ -63,28 +63,18 @@ const Answer = ({ question, questionId, authorId }: Props) => {
     setSetIsSubmittingAI(true);
 
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/chatgpt`, {
+      const response = await fetch("/api/chatgpt", {
         method: "POST",
         body: JSON.stringify({ question }),
       });
 
-      if (!response.ok) {
-        // Handle non-successful response, e.g., status code is not in the 200 range
-        throw new Error(`Request failed with status ${response.status}`);
-      }
-
       const aiAnswer = await response.json();
 
-      if (aiAnswer && aiAnswer.reply) {
-        const formattedAnswer = aiAnswer.reply.replace(/\n/g, "<br />");
+      const formattedAnswer = aiAnswer.reply.replace(/\n/g, "<br />");
 
-        if (editorRef.current) {
-          const editor = editorRef.current as any;
-          editor.setContent(formattedAnswer);
-        }
-      } else {
-        // Handle unexpected response format
-        console.error("Unexpected API response format:", aiAnswer);
+      if (editorRef.current) {
+        const editor = editorRef.current as any;
+        editor.setContent(formattedAnswer);
       }
     } catch (error) {
       console.log(error);
