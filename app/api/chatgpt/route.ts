@@ -34,3 +34,5 @@ export const POST = async (request: Request) => {
     return NextResponse.json({ error: error.message });
   }
 };
+
+export const maxDuration = 300;
